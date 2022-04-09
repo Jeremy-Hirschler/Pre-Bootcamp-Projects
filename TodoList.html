@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    .header { 
+	text-align: center; 
+	color: blue; 
+	border: 2px solid black; 
+	margin-left: 250px;
+	margin-right: 250px;
+	padding-bottom: 150px;
+	border-radius: 50px;
+	position: relative;}
+	
+    #tasker {
+	position: absolute; top: 125px; right: 250px; left: 250px;
+	line-height: 30px;
+	background-color: #00FFFF;
+	border-radius: 5px;
+	
+	}
+	
+	input[type = "text"]{
+	font-size: 20px;
+	}
+	
+	.add {
+	position: absolute; right: 140px; top: 135px;
+	line-height: 20px;
+	width: 100px;
+	}
+	
+	.clear {
+	position: absolute; right: 35px; top: 135px;
+	line-height: 20px;
+	width: 100px;
+	}
+	
+	#list{
+	 position: absolute; left: 500px; font-size: 25px;
+	display: block;
+	}
+	
+	.buttonForItem {
+	height: 20px;
+	position: relative; left: 200px;
+	width: 100px;
+	display:block;
+	}
+	
+	.newAdd{
+	color: red;
+	position: absolute; right: 200px; 
+	white-space: pre;
+	font-size: 25px;
+	top: -12px;
+	width: 100%;
+	}
+
+	
+  </style>
+
+</head>
+
+<body>
+
+<div class = "header">
+  <h1>To-Do List</h1>
+  <input type = "text" id = "tasker" placeholder = "Add a task" />
+  <div><button class = "add" id = "added" onClick = "addTask()">Add task!</button></div>
+  <div><button class = "clear" id = "cleared" onClick = "clearList()">Clear list!</button></div>
+  
+</div>
+<div class = "container">
+    <ul id = "list">
+ 
+    </ul>
+</div>
+
+
+<script>
+
+
+function addTask(){
+  //create a new list element
+  let node = document.createElement("li");
+  //grab user input and store in the variable addy
+  let addy = document.getElementById("tasker").value;
+  //create new child for li, a text node
+  let textNode = document.createTextNode(addy);
+  //append text node to li
+  node.appendChild(textNode);
+  node.className = "newAdd";
+  let newButton = document.createElement("button");
+  document.getElementById("list").appendChild(newButton);
+  newButton.className = "buttonForItem";
+  newButton.textContent = "Clear";
+
+  //append text as button child to delete later
+  newButton.appendChild(node);
+  newButton.addEventListener("click", clearSingleTask);
+  document.getElementById("tasker").value = "";
+  
+  
+}
+
+function clearList(){
+  let clearTheList = document.getElementById("list");
+  //remove child node from ul parent
+  while (clearTheList.hasChildNodes()){
+  clearTheList.removeChild(clearTheList.firstChild);
+  }
+
+}
+
+
+function clearSingleTask(){
+  this.remove();
+  }
+
+
+</script>
+
+
+
+
+
+
+</body>
+</html>
