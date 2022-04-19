@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<style type = "text/css">
+
+h1 {text-align: center;
+    font-weight: normal;
+   }
+  
+h3 {color: #006600;
+	text-align: center;
+   }
+	
+
+#itemName {
+  margin-left: 325px;
+  width: 57%;
+  height: 30px;
+  font-size: 20px;
+  }
+  
+#itemDate {
+  position: absolute; top: 200px;
+  left: 333px;
+  height: 30px;
+  font-size: 20px;
+  }  
+
+#itemAmount {
+  position: absolute; left: 829px; top: 200px;
+  height: 30px;
+  font-size: 20px;
+  }
+  
+.labels {
+  font-size: 30px; font-weight: bold;
+  }
+  
+#nameLabel{
+  position: absolute; top: 120px;
+  left: 189px;
+  }
+#dateLabel{
+  position: absolute; top: 200px; left: 235px;
+
+  }
+#amountLabel{
+  position: absolute; left: 660px; top: 200px;
+  }
+
+#add {
+  background-color: #00802b;
+  position: absolute; left: 590px; top: 250px;
+  height: 40px;
+  width: 100px;
+  color: white;
+  border-radius: 5px;
+  }
+  
+.report {
+  position: relative;
+  background-color: #b3b3b3;
+   
+  }
+
+.tableAdjust{
+  position: absolute; left: 333px; top: 320px;
+  border: solid 1px gray;
+  table-layout: auto; width: 57%;
+  text-align: left;
+  height: 30px;
+  font-size: 20px;
+  }
+  
+#clear{
+  position: absolute; left: 700px; top:250px;
+  background-color: #00802b;
+  height: 40px;
+  width: 100px;
+  color: white;
+  border-radius: 5px;
+
+}
+
+.buttonForExpense{
+  background-color: white;
+  
+}
+#expWidth{
+  width: 50%
+}
+tr:hover{background-color: #9cdcf7}
+
+
+</style>
+</head>
+
+<body>
+
+<h1>Expense Tracker</h1>
+<h3>Add A New Item</h3>
+
+<div class = "textFields">
+  <input type = "text" id = "itemName" placeholder = "Add an expense" />
+  <input type = "text" id = "itemDate" />
+  <input type = "text" id = "itemAmount" />
+
+  
+<div>
+
+<div class = "labels">
+    <label for = "itemName" id = "nameLabel">Expense:</label>
+    <label for = "itemDate" id = "dateLabel">Date:</label>
+    <label for = "itemAmount" id = "amountLabel">Amount ($):</label>
+</div>
+
+<button id = "add" onClick = "addIt()" title = "Add a new expense">Add Expense</button>
+
+<button id = "clear" onClick = "clearAll()" title = "Clear expense list">Clear List</button>
+
+<table id = "tabled" class = "tableAdjust">
+  <thead>
+    <tr>
+      <th id = expWidth>Expense</th>
+      <th>Date</th>
+      <th>Amount</th>
+    </tr>
+  </thead>
+  <tbody id = "newExpense">
+  </tbody></br>
+</table>
+
+
+
+
+
+
+
+
+
+<script type = "text/javascript">
+
+function addIt(){
+  //get user input for text fields
+  var item = document.getElementById("itemName").value;
+  var date = document.getElementById("itemDate").value;
+  var amount = document.getElementById("itemAmount").value;
+  
+  var tabs = document.getElementById("newExpense");
+  //create new table row at last position
+  var x = tabs.insertRow(-1);
+  //create new td or cell with variable values
+  var cell1 = x.insertCell(0).textContent = item;
+  var cell2 = x.insertCell(1).textContent = date;
+  var cell3 = x.insertCell(2).textContent = amount;
+  //define class to apply css styling to table
+  x.className = "report";
+ 
+
+  //create a new button for clearing single expenses
+  let newButton = document.createElement("button");
+  newButton.textContent = "Clear Expense";
+  newButton.className = "buttonForExpense";
+  newButton.addEventListener("click", remover);
+  //append button to new row so it appears on webpage
+  x.appendChild(newButton);
+  
+}
+
+
+
+function clearAll(){
+  var wholeList = document.getElementById("newExpense");
+  while (wholeList.hasChildNodes()){
+    wholeList.removeChild(wholeList.firstChild);
+  }
+}
+
+function remover(){
+ this.parentElement.remove();
+ this.remove(); 
+}
+
+
+
+
+
+
+</script>
+</body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</html>
